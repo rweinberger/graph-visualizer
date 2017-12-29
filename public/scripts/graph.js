@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+
   var svg = d3.select("svg"),
       width = +svg.attr("width"),
       height = +svg.attr("height");
@@ -8,7 +9,7 @@ $( document ).ready(function() {
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(width / 2, height / 2));
 
-  var graphName = $("#name").text();
+  var graphName = $("#name").attr("name");
 
   d3.json("/json?name=" + graphName, function(error, graph) {
     if (error) throw error;
@@ -68,4 +69,5 @@ $( document ).ready(function() {
     d.fx = null;
     d.fy = null;
   }
+
 });

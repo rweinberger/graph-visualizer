@@ -8,6 +8,8 @@
 </head>
 
 <body>
-  <b id='name'>{{name}}</b><br>
-  <svg width='960' height='600'></svg>
+  <p id='name' name={{name}}>/hbd/saved/{{name}}</p><br>
+  <svg id='svg' width='960' height='500'></svg><br><br>
+  <button type="button" onclick="window.location.href='/saved'">Back to saved</button>
+  <button type="button" onclick="window.location.href='/home'">Home</button>
 </body>

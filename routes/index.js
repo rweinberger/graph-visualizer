@@ -15,15 +15,13 @@ router.get('/home', function(req, res, next) {
 
 router.get('/graph', function(req, res, next) {
   var name = req.query.name;
-  res.render('graph', {name:name});
-  // Graph.find({name:name}, function(err, graph) {
-  //   if (err) {
-  //     res.redirect('/error')
-  //   } else {
-  //     console.log(graph);
-  //     res.render('graph', {graph: graph})
-  //   }
-  // });
+  Graph.find({name:name}, function(err, graph) {
+    if (err) {
+      res.redirect('/error')
+    } else {
+      res.render('graph', {name:name});
+    }
+  });
 });
 
 router.get('/json', function(req, res, next) {
@@ -31,8 +29,9 @@ router.get('/json', function(req, res, next) {
   Graph.find({name:name}, function(err, graph) {
     if (err) {
       res.redirect('/error')
+    } else if (!graph.length>0) {
+      res.redirect('/error')
     } else {
-      console.log(graph);
       res.send(graph)
     }
   });
