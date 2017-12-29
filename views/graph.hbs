@@ -8,8 +8,7 @@
 </head>
 
 <body>
-  <p id='name' name={{name}}>/hbd/saved/{{name}}</p><br>
+  <p id='name' name={{name}}><a href="/">~</a>/<a href="/home">hbd</a>/<a href="/saved">saved</a>/{{name}}</p><br>
   <svg id='svg' width='960' height='500'></svg><br><br>
-  <button type="button" onclick="window.location.href='/saved'">Back to saved</button>
-  <button type="button" onclick="window.location.href='/home'">Home</button>
+  <label>- <input style="width:240px;" type="range" min="0.5" max="1" step="any" value="0.5"> +</label><br>
 </body>

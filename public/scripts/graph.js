@@ -4,6 +4,9 @@ $( document ).ready(function() {
       width = +svg.attr("width"),
       height = +svg.attr("height");
 
+  d3.select("input[type=range]")
+      .on("input", inputted);
+
   var simulation = d3.forceSimulation()
       .force("link", d3.forceLink().id(function(d) { return d.id; }))
       .force("charge", d3.forceManyBody())
@@ -52,6 +55,12 @@ $( document ).ready(function() {
           .attr("cy", function(d) { return d.y; });
     }
   });
+
+  function inputted() {
+    console.log(this.value);
+    simulation.force("link").strength(+(1-this.value));
+    simulation.alpha(1).restart();
+  }
 
   function dragstarted(d) {
     if (!d3.event.active) simulation.alphaTarget(0.3).restart();
