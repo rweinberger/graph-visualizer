@@ -14,11 +14,39 @@ router.get('/home', function(req, res, next) {
 });
 
 router.get('/graph', function(req, res, next) {
-  res.render('graph', { });
+  var name = req.query.name;
+  res.render('graph', {name:name});
+  // Graph.find({name:name}, function(err, graph) {
+  //   if (err) {
+  //     res.redirect('/error')
+  //   } else {
+  //     console.log(graph);
+  //     res.render('graph', {graph: graph})
+  //   }
+  // });
 });
 
+router.get('/json', function(req, res, next) {
+  var name = req.query.name;
+  Graph.find({name:name}, function(err, graph) {
+    if (err) {
+      res.redirect('/error')
+    } else {
+      console.log(graph);
+      res.send(graph)
+    }
+  });
+})
+
 router.get('/saved', function(req, res, next) {
-  res.render('saved', { });
+  Graph.find({}, function(err, graphs) {
+    if (err) {
+      res.redirect('/error')
+    } else {
+      console.log(graphs);
+      res.render('saved', {graphs: graphs})
+    }
+  });
 });
 
 router.get('/new', function(req, res, next) {

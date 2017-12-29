@@ -8,19 +8,20 @@ $( document ).ready(function() {
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(width / 2, height / 2));
 
-  d3.json("/json/data.json", function(error, graph) {
-    if (error) throw error;
+  var graphName = $("#name").text();
 
+  d3.json("/json?name=" + graphName, function(error, graph) {
+    if (error) throw error;
     var link = svg.append("g")
         .attr("class", "links")
       .selectAll("line")
-      .data(graph.links)
+      .data(graph[0].edges)
       .enter().append("line");
 
     var node = svg.append("g")
         .attr("class", "nodes")
       .selectAll("circle")
-      .data(graph.nodes)
+      .data(graph[0].nodes)
       .enter().append("circle")
         .attr("r", 2.5)
         .call(d3.drag()
@@ -32,11 +33,11 @@ $( document ).ready(function() {
         .text(function(d) { return d.id; });
 
     simulation
-        .nodes(graph.nodes)
+        .nodes(graph[0].nodes)
         .on("tick", ticked);
 
     simulation.force("link")
-        .links(graph.links);
+        .links(graph[0].edges);
 
     function ticked() {
       link

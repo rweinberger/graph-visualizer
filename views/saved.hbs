@@ -2,12 +2,12 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="/scripts/graph.js"></script>
+  <script src="/scripts/folder.js"></script>
 </head>
 
 <body>
-  <b id='name'>{{name}}</b><br>
-  <svg width='960' height='600'></svg>
+  {{#each graphs}}
+    <a href='/graph?name={{name}}'>{{name}}</a><br>
+  {{/each}}
 </body>
