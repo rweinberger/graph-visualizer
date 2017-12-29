@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {"id": "reb"},
+    {"id": "santi"},
+    {"id": "annie"},
+    {"id": "fern"}
+  ],
+  "links": [
+    {"source": "santi", "target": "annie", "value": 4},
+    {"source": "reb", "target": "santi", "value": 4},
+    {"source": "reb", "target": "annie", "value": 1},
+    {"source": "fern", "target": "annie", "value": 3},
+    {"source": "fern", "target": "santi", "value": 1}
+  ]
+}
