@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var Graph = new Schema({
   name: String,
+  encrypted: Boolean,
   nodes: [
     {id: String}
   ],

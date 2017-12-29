@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+{{> head}}
+
+<body>
+  <p>Are you sure you want to delete <b>{{name}}</b>? This can't be undone.</p><br>
+  <form method="post" action="/delete-graph">
+    <textarea style="display:none" name="name">{{name}}</textarea>
+    <input type="submit" value="Yes"> <button type="button" onclick="window.location.href='/saved'">Cancel</button>
+  </form>
+</body>

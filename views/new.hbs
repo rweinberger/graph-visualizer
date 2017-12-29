@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="/scripts/folder.js"></script>
-</head>
+{{> head}}
 
 <body>
   <p><a href="/">~</a>/<a href="/home">hbd</a>/new</p>
   <p id='description'>
     Enter nodes as a comma-separated list, i.e. <b>a, b, c, d</b>
-    <br><br>
+    <br>
     Enter edges as hyphenated pairs of nodes and a weight, each on a new line, i.e. 
     <b><br>
     a-b 4<br>
@@ -22,6 +17,8 @@
     <textarea rows="1" cols="40" placeholder="graph name (no whitespace)" name="name" required></textarea><br>
     <textarea rows="2" cols="40" placeholder="nodes" name="nodes"></textarea><br>
     <textarea rows="10" cols="40" placeholder="edges" name="edges"></textarea><br>
+    <input type="checkbox" id="encrypt" name="encrypt">
+    <label for="encrypt">Encrypt node names</label><br><br>
     <input type="submit" value="Submit"> <button type="button" onclick="window.location.href='/home'">Cancel</button>
   </form>
 </body>

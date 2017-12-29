@@ -1,6 +1,7 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px monospace;
+  line-height: 24px;
 }
 
 a {
@@ -9,6 +10,50 @@ a {
 
 textarea {
   display: block;
+}
+
+textarea, button, input {
+  font-size: 12px;
+  font-family: monospace;
+  background-color: #fffffe;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #adadad;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+#sha-ify {
+  outline: none;
+  border:none;
+  width:75px;
+}
+
+#sha-ify:focus {
+  outline: none;
+}
+
+.saved-link {
+  -webkit-transition: width 0.2s ease-in-out;
+  -moz-transition: width 0.2s ease-in-out;
+  -o-transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+
+#settings {
+  cursor: pointer;
+  margin-bottom: -10px;
+}
+
+.edit {
+  overflow: visible !important;
+  cursor: pointer;
+  display: inline-block;
 }
 
 #folder {
@@ -27,4 +72,14 @@ textarea {
 
 svg {
   border: solid 1px #ccc;
+}
+
+.edit-block {
+  overflow: scroll;
+  display: inline-block;
+  border: solid 1px #ccc;
+  padding: 20px;
+  margin-right: 10px;
+  height: 400px;
+  width: 400px;
 }

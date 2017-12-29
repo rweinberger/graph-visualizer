@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{{> head}}
+
+<body>
+  <p><a href="/">~</a>/<a href="/home">hbd</a>/<a href="/saved">saved</a>/edit-{{name}}</b></p>
+
+  <div id='nodes' class='edit-block'>
+  <u>Nodes to delete</u>
+  {{#each nodes}}
+    <p>{{id}}</p>
+  {{/each}}
+  </div>
+
+  <div id='edges' class='edit-block'>
+  <u>Edges to delete</u>
+  {{#each edges}}
+    <p>{{source}}-{{target}} [{{value}}]</p>
+  {{/each}}
+  </div>
+
+  {{#if encrypted}} 
+    <div id='sha-converter'>
+      SHA256(<input type=text id='sha-ify' placeholder="enter word" onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';">)
+      <button type="button" id='getSHA'>&#x2192;</button> <div id='sha' style='display: inline-block;'></div>
+    </div>
+  {{/if}}
+
+</body>

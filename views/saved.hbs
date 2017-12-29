@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="/scripts/folder.js"></script>
-</head>
+{{> head}}
 
 <body>
   <p><a href="/">~</a>/<a href="/home">hbd</a>/saved</p>
+  <img id='settings' src="/images/settings.png" style="width:20px"/><br><br>
   {{#each graphs}}
-    <a href='/graph?name={{name}}'>{{name}}</a><br>
+    <!-- <img class='edit edit-{{name}}' src='/images/edit.png' style='width:14px; display:none'/> -->
+    <div class='edit' style='display: none; line-height: 24px;'><a href="/edit?name={{name}}">edit</a>/<a href="/delete?name={{name}}">delete</a></div>
+    <a class='saved-link' href='/graph?name={{name}}'>{{name}}</a><br>
   {{/each}}
 </body>
