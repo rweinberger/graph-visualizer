@@ -42,7 +42,6 @@ router.get('/saved', function(req, res, next) {
     if (err) {
       res.redirect('/error')
     } else {
-      console.log(graphs);
       res.render('saved', {graphs: graphs})
     }
   });
@@ -80,8 +79,6 @@ router.post('/new-graph', function (req, res, next) {
       edgesJSON.push({source:src, target:targ, value:val});
     }
   }
-  console.log(nodesJSON);
-  console.log(edgesJSON);
   var graph = new Graph({
     name: gName,
     nodes: nodesJSON,

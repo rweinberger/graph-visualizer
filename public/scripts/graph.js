@@ -57,7 +57,6 @@ $( document ).ready(function() {
   });
 
   function inputted() {
-    console.log(this.value);
     simulation.force("link").strength(+(1-this.value));
     simulation.alpha(1).restart();
   }
