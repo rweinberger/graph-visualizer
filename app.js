@@ -11,9 +11,8 @@ var users = require('./routes/users');
 
 var app = express();
 
-// mongoose.connect('mongodb://heroku_twst4cwl:gfqcd49mdrii4t56n9epn2o88@ds129010.mlab.com:29010/heroku_twst4cwl');
-
-mongoose.connect('mongodb://localhost/fernislegal');
+// mongoose.connect('mongodb://localhost/fernislegal');
+mongoose.connect('mongodb://reb:hey@ds135547.mlab.com:35547/heroku_l1xwddr7');
 var connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));
 connection.on('connected', function() {
