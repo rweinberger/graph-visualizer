@@ -4,19 +4,34 @@
 <body>
   <p><a href="/">~</a>/<a href="/home">hbd</a>/<a href="/saved">saved</a>/edit-{{name}}</b></p>
 
-  <div id='nodes' class='edit-block'>
-  <u>Nodes to delete</u>
-  {{#each nodes}}
-    <p>{{id}}</p>
-  {{/each}}
-  </div>
+  <form method="post" action="/edit-graph">
+    <div id='nodes' class='edit-block'>
+    <u>Nodes to delete</u><br>
+    {{#each nodes}}
+      <br>
+      <input type="checkbox" name="deletedNodes" value="{{id}}"> 
+      {{id}}
+    {{/each}}
+    </div>
 
-  <div id='edges' class='edit-block'>
-  <u>Edges to delete</u>
-  {{#each edges}}
-    <p>{{source}}-{{target}} [{{value}}]</p>
-  {{/each}}
-  </div>
+    <div id='edges' class='edit-block'>
+    <u>Edges to delete</u><br>
+    {{#each edges}}
+      <br>
+      <input type="checkbox" id="encrypt" name="deletedEdges" value="{{source}}-{{target}} {{value}}">
+      {{source}}-{{target}} [{{value}}]
+    {{/each}}
+    </div>
+
+    <div id='to-add' class='edit-block'>
+    <u>Nodes and edges to add</u><br><br>
+    <textarea rows="2" cols="40" placeholder="nodes" name="addedNodes"></textarea><br>
+    <textarea rows="10" cols="40" placeholder="edges" name="addedEdges"></textarea><br>
+    </div>
+    <br>
+    <input name="name" value="{{name}}">
+    <input type="submit" value="Make changes">
+  </form>
 
   {{#if encrypted}} 
     <div id='sha-converter'>

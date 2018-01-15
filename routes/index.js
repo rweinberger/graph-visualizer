@@ -6,6 +6,58 @@ var router = express.Router();
 /* models */
 var Graph = require('../schemas/graphSchema');
 
+/* helpers */
+function parseEdge(edge) {
+  var first = edge.split('-');
+  var source = first[0];
+  var second = first[1].split(' ');
+  var target = second[0];
+  var value = second[1];
+  return {source: source, target: target, value: value};
+}
+
+function deleteEdge(name, edge){
+  if (edge.source && edge.target && edge.value) {
+    Graph.updateOne(
+    {name: name}, 
+    {$pull: {edges: {source: edge.source, target: edge.target, value: edge.value}}},
+    function(err, info) {
+      if(err) throw err;
+      console.log("Edge "+edge.source+"-"+edge.target+" deleted from "+name+": "+info.ok);
+    });
+  } else if (edge.source) {
+    Graph.updateOne(
+    {name: name}, 
+    {$pull: {edges: {source: edge.source}}},
+    {multi: true},
+    function(err, info) {
+      if(err) throw err;
+      console.log("Edges with source "+edge.source+" deleted from "+name+": "+info.ok);
+    });
+  } else if (edge.target) {
+    Graph.updateOne(
+    {name: name}, 
+    {$pull: {edges: {target: edge.target}}},
+    {multi: true},
+    function(err, info) {
+      if(err) throw err;
+      console.log("Edges with target "+edge.target+" deleted from "+name+": "+info.ok);
+    });
+  }
+}
+
+function deleteNode(name, node) {
+  console.log(node);
+  Graph.updateOne(
+  {name: name}, 
+  {$pull: {nodes: {id: node}}},
+  function(err, info) {
+    if(err) throw err;
+    console.log("Node "+node+" deleted from "+name+": "+info.ok);
+  });
+}
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {title:"~"});
@@ -35,6 +87,42 @@ router.get('/edit', function(req, res, next) {
       res.render('edit', {nodes: graph.nodes, edges:graph.edges, title:name, name:name, encrypted:graph.encrypted});
     }
   });
+});
+
+router.post('/edit-graph', function(req, res, next) {
+  var deletedNodes = req.body.deletedNodes;
+  var deletedEdges = req.body.deletedEdges;
+  var addedNodes = req.body.addedNodes;
+  var addedEdges = req.body.addedEdges;
+  var name = req.body.name;
+  // delete specified edges
+  if (deletedEdges != null) {
+    if (typeof deletedEdges == "string") {
+      var parsedEdge = parseEdge(deletedEdges);
+      deleteEdge(name, parsedEdge);
+    } else {
+      for (var i = 0; i < deletedEdges.length; i++) {
+        var toDelete = deletedEdges[i];
+        var parsedEdge = parseEdge(toDelete);
+        deleteEdge(name, parsedEdge);
+      }
+    }
+  }
+  // delete specified nodes & associated edges
+  if (deletedNodes != null) {
+    if (typeof deletedNodes == "string") {
+      deleteNode(name, deletedNodes);
+      deleteEdge(name, {source: deletedNodes});
+      deleteEdge(name, {target: deletedNodes});
+    } else {
+      for (var i = 0; i < deletedNodes.length; i++) {
+        var toDelete = deletedNodes[i];
+        deleteNode(name, toDelete);
+        deleteEdge(name, {source: toDelete});
+        deleteEdge(name, {target: toDelete});
+      }
+    }
+  }
 });
 
 router.get('/delete', function(req, res, next) {
